@@ -24,8 +24,8 @@
    <Label fx:id="emailLabel" text="Votre Email :" />
    <TextField fx:id="emailTextField" />
     <Label fx:id="mdpLabel" text="Votre Mot de Passe :" /> <PasswordField fx:id="mdpPasswordField"> </PasswordField>
-    <Label fx:id="mdpConfirmationLabel" text="Confirmation Mot de Passe :" /> <TextField fx:id="mdpConfirmationPasswordField"> </TextField>
-    <Label text="Label en cas d'erreur" textFill="RED">
+    <Label fx:id="mdpConfirmationLabel" text="Confirmation Mot de Passe :" /> <PasswordField fx:id="mdpConfirmationPasswordField"> </PasswordField>
+    <Label fx:id="erreur" textFill="RED">
         <font>
             <Font name="System Bold Italic" size="12.0" />
         </font>

@@ -12,6 +12,7 @@ import java.io.IOException;
 
 public class LoginController {
 
+    public Label erreur;
     @FXML
     private Button connexionButton;
 
@@ -39,6 +40,7 @@ public class LoginController {
             System.out.println("Connexion Reussi");
         }else {
             System.out.println("echec");
+            erreur.setText("Erreur de connexion");
         }
     }
 

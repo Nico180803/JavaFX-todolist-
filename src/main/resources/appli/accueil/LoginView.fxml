@@ -19,7 +19,7 @@
    </Label>
     <Label fx:id="emailLabel" text="Votre Email :" /> <TextField fx:id="emailTextField"> </TextField>
     <Label fx:id="mdpLabel" text="Votre Mot de Passe :" /> <PasswordField fx:id="mdpPasswordField"> </PasswordField>
-   <Label text="Label en cas d'erreur" textFill="RED">
+   <Label fx:id="erreur" textFill="RED">
       <font>
          <Font name="System Bold Italic" size="12.0" />
       </font>
