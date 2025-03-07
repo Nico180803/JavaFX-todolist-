@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import model.Utilisateur;
+import repository.UtilisateurRepository;
 
 import java.io.IOException;
 
@@ -53,12 +55,18 @@ public class InscriptionController {
     private Button retourButton;
 
     @FXML
-    void onInscriptionClick(ActionEvent event) {
-        if (emailTextField.getText().equals("mail@mail.fr")||mdpPasswordField.getText().equals(mdpConfirmationPasswordField.getText())||emailTextField.getText().isEmpty()||nomTextField.getText().isEmpty()||prenomTextField.getText().isEmpty()||mdpPasswordField.getText().isEmpty()||mdpConfirmationPasswordField.getText().isEmpty()) {
-            System.out.println("Erreur");
-            erreur.setText("Erreur");
-        }else {
-            System.out.println("Inscripiton reussite");
+    void onInscriptionClick(ActionEvent event) throws IOException {
+        UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
+        if (!mdpPasswordField.getText().equals(mdpConfirmationPasswordField.getText())||emailTextField.getText().isEmpty()||nomTextField.getText().isEmpty()||prenomTextField.getText().isEmpty()||mdpPasswordField.getText().isEmpty()||mdpConfirmationPasswordField.getText().isEmpty()) {
+            System.out.println("Erreur, les champs ne sont pas tous renseigné");
+            erreur.setText("Erreur, les champs ne sont pas tous renseigné");
+        } else if (utilisateurRepository.verifUser(emailTextField.getText())) {
+            System.out.println("Erreur le mail existe déja");
+            erreur.setText("Erreur, le mail existe déja");
+        } else {
+            Utilisateur utilisateur = new Utilisateur(nomTextField.getText(), prenomTextField.getText(), emailTextField.getText(), mdpPasswordField.getText(), "CHARPENTIER");
+            utilisateurRepository.ajouterUtilisateur(utilisateur);
+            StartApplication.changeScene("accueil/Login");
         }
     }
 

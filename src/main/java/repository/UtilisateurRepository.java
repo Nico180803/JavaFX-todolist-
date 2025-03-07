@@ -3,6 +3,8 @@ package repository;
 import database.Database;
 import jdk.jshell.execution.Util;
 import model.Utilisateur;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,13 +18,15 @@ public class UtilisateurRepository {
     }
 
     public void ajouterUtilisateur(Utilisateur utilisateur) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         String sql = "INSERT INTO utilisateurs (nom, prenom, email, mdp, role) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, utilisateur.getNom());
             stmt.setString(2, utilisateur.getPrenom());
             stmt.setString(3, utilisateur.getEmail());
-            stmt.setString(4, utilisateur.getMdp());
+            stmt.setString(4, encoder.encode(utilisateur.getMdp()));
             stmt.setString(5, utilisateur.getRole());
             stmt.executeUpdate();
             System.out.println("Utilisateur ajouté avec succès !");
@@ -91,6 +95,41 @@ public class UtilisateurRepository {
 
         }catch (SQLException e){
             System.out.println("Erreur lors de la modification du compte : " + e.getMessage());
+        }
+    }
+
+    public boolean connecterUser(String email, String password) {
+
+        //recup mdp encrypter avec SELECT
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String sql = "SELECT * FROM utilisateurs WHERE email = ? AND mdp = ?";
+        try {
+            PreparedStatement stmt = connexion.prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, encoder.matches(password));
+            ResultSet rs = stmt.executeQuery();
+            System.out.println("Connection reussi");
+            return true;
+        }catch (SQLException e){
+            System.out.println("Erreur lors de la connexion du compte : " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean verifUser(String email) {
+        String sql = "SELECT * FROM utilisateurs WHERE email = ?";
+        try {
+            PreparedStatement stmt = connexion.prepareStatement(sql);
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                return true;
+            }else {
+                return false;
+            }
+        }catch (SQLException e){
+            System.out.println("Erreur lors de la connexion du compte : " + e.getMessage());
+            return true;
         }
     }
 }

@@ -18,6 +18,19 @@ public class Utilisateur {
         this.role = role;
     }
 
+    public Utilisateur(String nom, String prenom, String email, String password, String role) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.mdp = password;
+        this.role = role;
+    }
+
+    public Utilisateur(String email, String password) {
+        this.email = email;
+        this.mdp = password;
+    }
+
     @Override
     public String toString() {
         return "Utilisateur{" +

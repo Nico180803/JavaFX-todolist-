@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import repository.UtilisateurRepository;
 
 import java.io.IOException;
 
@@ -35,11 +36,13 @@ public class LoginController {
     private PasswordField mdpPasswordField;
 
     @FXML
-    void onConnexionClick(ActionEvent event) {
-        if (mdpPasswordField.getText().equals("Azerty1234") && emailTextField.getText().equals("mail@mail.fr")) {
-            System.out.println("Connexion Reussi");
-        }else {
-            System.out.println("echec");
+    void onConnexionClick(ActionEvent event) throws IOException {
+        UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
+        boolean connexion = utilisateurRepository.connecterUser(emailTextField.getText(), mdpPasswordField.getText());
+        if (connexion) {
+            StartApplication.changeScene("accueil/Test");
+        }else{
+            System.out.println("echec connexion");
             erreur.setText("Erreur de connexion");
         }
     }
