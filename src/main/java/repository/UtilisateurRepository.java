@@ -100,7 +100,7 @@ public class UtilisateurRepository {
 
     public boolean connecterUser(String email, String password) {
 
-        //recup mdp encrypter avec SELECT
+        //recup mdp encrypter avec SELECT p
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String sql = "SELECT * FROM utilisateurs WHERE email = ? AND mdp = ?";
         try {
