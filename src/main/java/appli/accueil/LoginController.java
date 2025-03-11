@@ -50,6 +50,7 @@ public class LoginController {
             System.out.println("Échec de la connexion. Email ou mot de passe incorrect.");
             erreur.setText("Email ou mot de passe incorrect.");
             erreur.setVisible(true);
+
         }
     }
 
