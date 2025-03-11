@@ -98,10 +98,11 @@ public class UtilisateurRepository {
         }
     }
 
-    public boolean connecterUser(String email, String password) {
+    public Utilisateur connecterUser(String email, String password) {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String mdp = null;
+        Utilisateur utilisateur = null;
 
         String sql = "SELECT * FROM utilisateur WHERE email = ?";
         try {
@@ -112,7 +113,7 @@ public class UtilisateurRepository {
                 mdp =rs.getString("mdp");
                 System.out.println(mdp);
             }else{
-                return false;
+                return null;
             }
         }catch (SQLException e){
             System.out.println("erreur dans la récupération de l'email");
@@ -126,15 +127,20 @@ public class UtilisateurRepository {
                 stmt.setString(2, mdp);
 
                 ResultSet rs = stmt.executeQuery();
-                System.out.println("Connection reussi");
-                return true;
+                if(rs.next()) {
+                    utilisateur = new Utilisateur(rs.getString("id_utilisateur"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getString("mdp"));
+                    System.out.println("Connection reussi");
+                    return utilisateur;
+                }else {
+                    return null;
+                }
             } catch (SQLException e) {
                 System.out.println("Erreur lors de la connexion du compte : " + e.getMessage());
-                return false;
+                return null;
             }
         }else {
             System.out.println("Mot de passe incorrect");
-            return false;
+            return null;
         }
     }
 

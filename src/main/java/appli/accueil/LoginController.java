@@ -7,11 +7,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import model.Utilisateur;
 import repository.UtilisateurRepository;
+import session.SessionUtilisateur;
 
 import java.io.IOException;
 
 public class LoginController {
+
+    private UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
 
     public Label erreur;
     @FXML
@@ -37,13 +41,15 @@ public class LoginController {
 
     @FXML
     void onConnexionClick(ActionEvent event) throws IOException {
-        UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
-        boolean connexion = utilisateurRepository.connecterUser(emailTextField.getText(), mdpPasswordField.getText());
-        if (connexion) {
-            StartApplication.changeScene("accueil/Test");
+        Utilisateur utilisateur = utilisateurRepository.connecterUser(emailTextField.getText(), mdpPasswordField.getText());
+        if (utilisateur != null) {
+            System.out.println("Connexion réussie pour : " + utilisateur.getNom());
+            SessionUtilisateur.getInstance().sauvegardeSession(utilisateur);
+            erreur.setVisible(false);
         }else{
-            System.out.println("echec connexion");
-            erreur.setText("Erreur de connexion");
+            System.out.println("Échec de la connexion. Email ou mot de passe incorrect.");
+            erreur.setText("Email ou mot de passe incorrect.");
+            erreur.setVisible(true);
         }
     }
 
