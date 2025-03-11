@@ -20,9 +20,9 @@ public class UtilisateurRepository {
     public void ajouterUtilisateur(Utilisateur utilisateur) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        String sql = "INSERT INTO utilisateurs (nom, prenom, email, mdp, role) VALUES (?, ?, ?, ?, ?)";
+        String sqlDeux = "INSERT INTO utilisateur (nom, prenom, email, mdp, role) VALUES (?, ?, ?, ?, ?)";
         try {
-            PreparedStatement stmt = connexion.prepareStatement(sql);
+            PreparedStatement stmt = connexion.prepareStatement(sqlDeux);
             stmt.setString(1, utilisateur.getNom());
             stmt.setString(2, utilisateur.getPrenom());
             stmt.setString(3, utilisateur.getEmail());
@@ -36,7 +36,7 @@ public class UtilisateurRepository {
     }
 
     public Utilisateur getUtilisateurParEmail(String email) {
-        String sql = "SELECT * FROM utilisateurs WHERE email = ?";
+        String sql = "SELECT * FROM utilisateur WHERE email = ?";
 
         Utilisateur utilisateur = null;
         try {
@@ -53,25 +53,25 @@ public class UtilisateurRepository {
         return utilisateur;
     }
 
-    public ArrayList<Utilisateur> getAllUtilisateurs() {
-        ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
-        String sql = "SELECT * FROM utilisateurs";
+    public ArrayList<Utilisateur> getAllutilisateur() {
+        ArrayList<Utilisateur> utilisateur = new ArrayList<>();
+        String sql = "SELECT * FROM utilisateur";
         try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
-                Utilisateur utilisateur = new Utilisateur(rs.getInt("id_user"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("mdp"), rs.getString("role"));
-                utilisateurs.add(utilisateur);
+                Utilisateur utilisateurUn = new Utilisateur(rs.getInt("id_user"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("mdp"), rs.getString("role"));
+                utilisateur.add(utilisateurUn);
             }
 
         } catch (SQLException e){
-            System.out.println("Erreur lors de la récupération des utilisateurs : " + e.getMessage());
+            System.out.println("Erreur lors de la récupération des utilisateur : " + e.getMessage());
         }
-        return utilisateurs;
+        return utilisateur;
     }
 
     public void supprimerUtilisateurParEmail(String email) {
-        String sql = "DELETE FROM utilisateurs WHERE email = ?";
+        String sql = "DELETE FROM utilisateur WHERE email = ?";
         try{
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, email);
@@ -83,7 +83,7 @@ public class UtilisateurRepository {
     }
 
     public void mettreAJourUtilisateur(Utilisateur utilisateur) {
-        String sql = "UPDATE utilisateurs SET nom = ?, prenom = ?, mdp = ?, role = ? WHERE email = ?";
+        String sql = "UPDATE utilisateur SET nom = ?, prenom = ?, mdp = ?, role = ? WHERE email = ?";
         try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, utilisateur.getNom());
@@ -100,24 +100,46 @@ public class UtilisateurRepository {
 
     public boolean connecterUser(String email, String password) {
 
-        //recup mdp encrypter avec SELECT p
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String sql = "SELECT * FROM utilisateurs WHERE email = ? AND mdp = ?";
+        String mdp = null;
+
+        String sql = "SELECT * FROM utilisateur WHERE email = ?";
         try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, email);
-            stmt.setString(2, encoder.matches(password));
             ResultSet rs = stmt.executeQuery();
-            System.out.println("Connection reussi");
-            return true;
+            if(rs.next()){
+                mdp =rs.getString("mdp");
+                System.out.println(mdp);
+            }else{
+                return false;
+            }
         }catch (SQLException e){
-            System.out.println("Erreur lors de la connexion du compte : " + e.getMessage());
+            System.out.println("erreur dans la récupération de l'email");
+        }
+
+        if (encoder.matches(password,mdp)) {
+            String sqlDeux = "SELECT * FROM utilisateur WHERE email = ? AND mdp = ?";
+            try {
+                PreparedStatement stmt = connexion.prepareStatement(sqlDeux);
+                stmt.setString(1, email);
+                stmt.setString(2, mdp);
+
+                ResultSet rs = stmt.executeQuery();
+                System.out.println("Connection reussi");
+                return true;
+            } catch (SQLException e) {
+                System.out.println("Erreur lors de la connexion du compte : " + e.getMessage());
+                return false;
+            }
+        }else {
+            System.out.println("Mot de passe incorrect");
             return false;
         }
     }
 
     public boolean verifUser(String email) {
-        String sql = "SELECT * FROM utilisateurs WHERE email = ?";
+        String sql = "SELECT * FROM utilisateur WHERE email = ?";
         try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, email);

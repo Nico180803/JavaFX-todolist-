@@ -16,7 +16,7 @@ public class StartApplication extends Application {
         mainStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("accueil/LoginView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        mainStage.setTitle("Connexion");
+        mainStage.setTitle("ToDoList");
         mainStage.setScene(scene);
         mainStage.show();
     }
