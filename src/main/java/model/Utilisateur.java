@@ -7,23 +7,20 @@ public class Utilisateur {
     private String prenom;
     private String email;
     private String mdp;
-    private String role;
 
-    public Utilisateur(int id, String nom, String prenom, String email, String password, String role) {
+    public Utilisateur(int id, String nom, String prenom, String email, String password) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.mdp = password;
-        this.role = role;
     }
 
-    public Utilisateur(String nom, String prenom, String email, String password, String role) {
+    public Utilisateur(String nom, String prenom, String email, String password) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.mdp = password;
-        this.role = role;
     }
 
     public Utilisateur(String email, String password) {
@@ -39,7 +36,6 @@ public class Utilisateur {
                 ", prenom='" + prenom + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + mdp + '\'' +
-                ", role='" + role + '\'' +
                 '}';
     }
 
@@ -83,11 +79,4 @@ public class Utilisateur {
         this.mdp = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 }

@@ -20,14 +20,13 @@ public class UtilisateurRepository {
     public void ajouterUtilisateur(Utilisateur utilisateur) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        String sqlDeux = "INSERT INTO utilisateur (nom, prenom, email, mdp, role) VALUES (?, ?, ?, ?, ?)";
+        String sqlDeux = "INSERT INTO utilisateur (nom, prenom, email, mdp) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement stmt = connexion.prepareStatement(sqlDeux);
             stmt.setString(1, utilisateur.getNom());
             stmt.setString(2, utilisateur.getPrenom());
             stmt.setString(3, utilisateur.getEmail());
             stmt.setString(4, encoder.encode(utilisateur.getMdp()));
-            stmt.setString(5, utilisateur.getRole());
             stmt.executeUpdate();
             System.out.println("Utilisateur ajouté avec succès !");
         } catch (SQLException e) {
@@ -44,7 +43,7 @@ public class UtilisateurRepository {
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
-                utilisateur = new Utilisateur(rs.getInt("id_user"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getString("mdp"),rs.getString("role"));
+                utilisateur = new Utilisateur(rs.getInt("id_user"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getString("mdp"));
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la recuperation de l'utilisateur : " + e.getMessage());
@@ -60,7 +59,7 @@ public class UtilisateurRepository {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
-                Utilisateur utilisateurUn = new Utilisateur(rs.getInt("id_user"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("mdp"), rs.getString("role"));
+                Utilisateur utilisateurUn = new Utilisateur(rs.getInt("id_user"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("mdp"));
                 utilisateur.add(utilisateurUn);
             }
 
@@ -83,14 +82,13 @@ public class UtilisateurRepository {
     }
 
     public void mettreAJourUtilisateur(Utilisateur utilisateur) {
-        String sql = "UPDATE utilisateur SET nom = ?, prenom = ?, mdp = ?, role = ? WHERE email = ?";
+        String sql = "UPDATE utilisateur SET nom = ?, prenom = ?, mdp = ? WHERE email = ?";
         try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, utilisateur.getNom());
             stmt.setString(2, utilisateur.getPrenom());
             stmt.setString(3, utilisateur.getMdp());
-            stmt.setString(4, utilisateur.getRole());
-            stmt.setString(5, utilisateur.getEmail());
+            stmt.setString(4, utilisateur.getEmail());
             stmt.executeUpdate();
 
         }catch (SQLException e){
@@ -128,7 +126,7 @@ public class UtilisateurRepository {
 
                 ResultSet rs = stmt.executeQuery();
                 if(rs.next()) {
-                    utilisateur = new Utilisateur(rs.getString("id_utilisateur"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getString("mdp"));
+                    utilisateur = new Utilisateur(rs.getInt("id_utilisateur"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getString("mdp"));
                     System.out.println("Connection reussi");
                     return utilisateur;
                 }else {

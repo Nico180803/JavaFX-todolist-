@@ -64,7 +64,7 @@ public class InscriptionController {
             System.out.println("Erreur le mail existe déja");
             erreur.setText("Erreur, le mail existe déja");
         } else {
-            Utilisateur utilisateur = new Utilisateur(nomTextField.getText(), prenomTextField.getText(), emailTextField.getText(), mdpPasswordField.getText(), "CHARPENTIER");
+            Utilisateur utilisateur = new Utilisateur(nomTextField.getText(), prenomTextField.getText(), emailTextField.getText(), mdpPasswordField.getText());
             utilisateurRepository.ajouterUtilisateur(utilisateur);
             StartApplication.changeScene("accueil/Login");
         }
