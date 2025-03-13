@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UtilisateurRepository {
 
@@ -52,14 +53,14 @@ public class UtilisateurRepository {
         return utilisateur;
     }
 
-    public ArrayList<Utilisateur> getAllutilisateur() {
+    public List<Utilisateur> getAllutilisateur() {
         ArrayList<Utilisateur> utilisateur = new ArrayList<>();
         String sql = "SELECT * FROM utilisateur";
         try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
-                Utilisateur utilisateurUn = new Utilisateur(rs.getInt("id_user"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("mdp"));
+                Utilisateur utilisateurUn = new Utilisateur(rs.getInt("id_utilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("mdp"));
                 utilisateur.add(utilisateurUn);
             }
 

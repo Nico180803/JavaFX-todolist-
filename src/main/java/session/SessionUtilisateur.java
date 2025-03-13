@@ -17,7 +17,7 @@ public class SessionUtilisateur {
     }
 
     public void sauvegardeSession(Utilisateur utilisateur) {
-        if (this.utilisateurConnecte != null) {
+        if (this.utilisateurConnecte == null) {
             this.utilisateurConnecte = utilisateur;
         }
     }
