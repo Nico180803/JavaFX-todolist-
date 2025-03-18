@@ -3,17 +3,17 @@ package model;
 public class Type {
     private int idType;
     private String nom;
-    private String code_couleur;
+    private String codeCouleur;
 
-    public Type(int idType, String nom, String code_couleur) {
+    public Type(int idType, String nom, String codeCouleur) {
         this.idType = idType;
         this.nom = nom;
-        this.code_couleur = code_couleur;
+        this.codeCouleur = codeCouleur;
     }
 
-    public Type(String nom, String code_couleur) {
+    public Type(String nom, String codeCouleur) {
         this.nom = nom;
-        this.code_couleur = code_couleur;
+        this.codeCouleur = codeCouleur;
     }
 
     public int getidType() {
@@ -28,11 +28,11 @@ public class Type {
         this.nom = nom;
     }
 
-    public String getCode_couleur() {
-        return code_couleur;
+    public String getCodeCouleur() {
+        return codeCouleur;
     }
 
-    public void setCode_couleur(String code_couleur) {
-        this.code_couleur = code_couleur;
+    public void setCodeCouleur(String codeCouleur) {
+        this.codeCouleur = codeCouleur;
     }
 }

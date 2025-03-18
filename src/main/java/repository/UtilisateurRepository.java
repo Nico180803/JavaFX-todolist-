@@ -22,6 +22,7 @@ public class UtilisateurRepository {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         String sqlDeux = "INSERT INTO utilisateur (nom, prenom, email, mdp) VALUES (?, ?, ?, ?)";
+
         try {
             PreparedStatement stmt = connexion.prepareStatement(sqlDeux);
             stmt.setString(1, utilisateur.getNom());
@@ -29,6 +30,7 @@ public class UtilisateurRepository {
             stmt.setString(3, utilisateur.getEmail());
             stmt.setString(4, encoder.encode(utilisateur.getMdp()));
             stmt.executeUpdate();
+
             System.out.println("Utilisateur ajouté avec succès !");
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());

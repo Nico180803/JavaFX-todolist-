@@ -15,9 +15,11 @@ public class Tache {
         this.refType = refType;
     }
 
-    public Tache(String nom, int etat) {
+    public Tache(String nom, int etat, int refListe, int refType) {
         this.nom = nom;
         this.etat = etat;
+        this.refListe = refListe;
+        this.refType = refType;
     }
 
     public int getidTache() {
