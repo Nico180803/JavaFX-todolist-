@@ -25,4 +25,7 @@ public class Liste {
         return idListe;
     }
 
+    public void setIdListe(int idListe) {
+        this.idListe = idListe;
+    }
 }
