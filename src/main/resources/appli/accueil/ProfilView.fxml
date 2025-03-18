@@ -2,13 +2,16 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.ProfilController">
    <children>
       <Button fx:id="deconnexionButton" layoutX="506.0" layoutY="360.0" mnemonicParsing="false" onAction="#OnDeconnexionClick" text="Déconnexion" />
-      <Button fx:id="nouvelleListeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnNouvelleListeClick" text="Nouvelle Liste" />
-      <ListView layoutX="210.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button fx:id="nouvelleListeButton" layoutX="404.0" layoutY="62.0" mnemonicParsing="false" onAction="#OnNouvelleListeClick" text="Nouvelle Liste" />
+      <ListView layoutX="349.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button fx:id="modifierProfilButton" layoutX="59.0" layoutY="360.0" mnemonicParsing="false" onAction="#OnModfierProfilClick" text="Modifier Profil" />
+      <Button fx:id="pageAdminButton" layoutX="511.0" layoutY="326.0" mnemonicParsing="false" onAction="#OnPageAdminButtonClick" text="Page Admin" />
+      <TextField fx:id="nomListeTextField" layoutX="375.0" layoutY="31.0" promptText="Nom de la liste" />
    </children>
 </AnchorPane>

@@ -1,6 +1,5 @@
 package appli.accueil;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -9,11 +8,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.Utilisateur;
 import repository.UtilisateurRepository;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TableauUserController implements Initializable {
+public class AdminController implements Initializable {
     @FXML
     private TableView<Utilisateur> tableView;
     @FXML
