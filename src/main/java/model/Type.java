@@ -1,12 +1,12 @@
 package model;
 
 public class Type {
-    private int id_type;
+    private int idType;
     private String nom;
     private String code_couleur;
 
-    public Type(int id_type, String nom, String code_couleur) {
-        this.id_type = id_type;
+    public Type(int idType, String nom, String code_couleur) {
+        this.idType = idType;
         this.nom = nom;
         this.code_couleur = code_couleur;
     }
@@ -16,8 +16,8 @@ public class Type {
         this.code_couleur = code_couleur;
     }
 
-    public int getId_type() {
-        return id_type;
+    public int getidType() {
+        return idType;
     }
 
     public String getNom() {

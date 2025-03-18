@@ -1,18 +1,18 @@
 package model;
 
 public class Tache {
-    private int id_tache;
+    private int idTache;
     private String nom;
     private int etat;
-    private int ref_liste;
-    private int ref_type;
+    private int refListe;
+    private int refType;
 
-    public Tache(int id, String nom, int etat, int ref_liste, int ref_type) {
-        this.id_tache = id;
+    public Tache(int id, String nom, int etat, int refListe, int refType) {
+        this.idTache = id;
         this.nom = nom;
         this.etat = etat;
-        this.ref_liste = ref_liste;
-        this.ref_type = ref_type;
+        this.refListe = refListe;
+        this.refType = refType;
     }
 
     public Tache(String nom, int etat) {
@@ -20,8 +20,8 @@ public class Tache {
         this.etat = etat;
     }
 
-    public int getId_tache() {
-        return id_tache;
+    public int getidTache() {
+        return idTache;
     }
 
     public String getNom() {
@@ -40,19 +40,19 @@ public class Tache {
         this.etat = etat;
     }
 
-    public int getRef_liste() {
-        return ref_liste;
+    public int getrefListe() {
+        return refListe;
     }
 
-    public void setRef_liste(int ref_liste) {
-        this.ref_liste = ref_liste;
+    public void setrefListe(int refListe) {
+        this.refListe = refListe;
     }
 
-    public int getRef_type() {
-        return ref_type;
+    public int getrefType() {
+        return refType;
     }
 
-    public void setRef_type(int ref_type) {
-        this.ref_type = ref_type;
+    public void setrefType(int refType) {
+        this.refType = refType;
     }
 }

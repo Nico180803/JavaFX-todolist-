@@ -46,7 +46,7 @@ public class LoginController {
             System.out.println("Connexion réussie pour : " + utilisateur.getNom());
             SessionUtilisateur.getInstance().sauvegardeSession(utilisateur);
             erreur.setVisible(false);
-            StartApplication.changeScene("accueil/TableauUser");
+            StartApplication.changeScene("accueil/Profil");
         }else{
             System.out.println("Échec de la connexion. Email ou mot de passe incorrect.");
             erreur.setText("Email ou mot de passe incorrect.");

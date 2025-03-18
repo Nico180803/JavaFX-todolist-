@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="appli.accueil.ProfilController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.ProfilController">
+   <children>
+      <Button fx:id="deconnexionButton" layoutX="506.0" layoutY="360.0" mnemonicParsing="false" onAction="#OnDeconnexionClick" text="Déconnexion" />
+      <Button fx:id="nouvelleListeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnNouvelleListeClick" text="Nouvelle Liste" />
+      <ListView layoutX="210.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
+   </children>
 </AnchorPane>
