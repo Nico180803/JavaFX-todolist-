@@ -9,8 +9,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import model.Liste;
 import repository.ListeRepository;
+import repository.UtilisateurRepository;
 import session.SessionUtilisateur;
 
 import java.io.IOException;
@@ -21,13 +24,36 @@ public class ProfilController implements Initializable {
 
     @FXML
     private TableView<Liste> tableView;
+
     @FXML
     private ListeRepository listeRepository = new ListeRepository();
+
+    @FXML
+    private UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
+
     @FXML
     private Button deconnexionButton;
 
     @FXML
+    private TextField emailTextField;
+
+    @FXML
     private Button modifierProfilButton;
+
+    @FXML
+    private TextField nomListeTextField;
+
+    @FXML
+    private Text nomProfilText;
+
+    @FXML
+    private TextField nomTextField;
+
+    @FXML
+    private Button modifierListeButton;
+
+    @FXML
+    private Button supprimerListeButton;
 
     @FXML
     private Button nouvelleListeButton;
@@ -36,10 +62,23 @@ public class ProfilController implements Initializable {
     private Button pageAdminButton;
 
     @FXML
-    private TextField nomListeTextField;
+    private TextField prenomTextField;
+
+    @FXML
+    private Button supprimerProfilButton;
+
+    @FXML
+    private Text reussiteText;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        nomProfilText.setText("Profil de "+SessionUtilisateur.getInstance().getUtilisateur().getPrenom()+" "+SessionUtilisateur.getInstance().getUtilisateur().getNom());
+
+        nomTextField.setText(SessionUtilisateur.getInstance().getUtilisateur().getNom());
+        prenomTextField.setText(SessionUtilisateur.getInstance().getUtilisateur().getPrenom());
+        emailTextField.setText(SessionUtilisateur.getInstance().getUtilisateur().getEmail());
+
+
         String [][] colonnes = {
                 { "Id Liste","idListe" },
                 { "Nom","nom" },
@@ -68,6 +107,13 @@ public class ProfilController implements Initializable {
     @FXML
     void OnModfierProfilClick(ActionEvent event) {
 
+        SessionUtilisateur.getInstance().getUtilisateur().setNom(nomTextField.getText());
+        SessionUtilisateur.getInstance().getUtilisateur().setPrenom(prenomTextField.getText());
+        SessionUtilisateur.getInstance().getUtilisateur().setEmail(emailTextField.getText());
+
+        utilisateurRepository.mettreAJourUtilisateur(SessionUtilisateur.getInstance().getUtilisateur());
+        reussiteText.setText("Profil bien mis à jour !");
+        nomProfilText.setText("Profil de "+SessionUtilisateur.getInstance().getUtilisateur().getPrenom()+" "+SessionUtilisateur.getInstance().getUtilisateur().getNom());
     }
 
     @FXML
@@ -85,7 +131,29 @@ public class ProfilController implements Initializable {
     }
 
     @FXML
-    void OnPageAdminButtonClick(ActionEvent event) {
+    void OnPageAdminButtonClick(ActionEvent event) throws IOException {
+        StartApplication.changeScene("accueil/Admin");
+    }
+
+    @FXML
+    void OnSupprimerListeClick(ActionEvent event) {
+            listeRepository.supprimerListe(tableView.getSelectionModel().getSelectedItem());
+            tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    void OnSupprimerProfilClick(ActionEvent event) throws IOException {
+        utilisateurRepository.supprimerUtilisateur(SessionUtilisateur.getInstance().getUtilisateur());
+        SessionUtilisateur.getInstance().deconnecter();
+        StartApplication.changeScene("accueil/Login");
+    }
+
+    @FXML
+    void OnTableViewPressed(MouseEvent event) {
+    }
+
+    @FXML
+    void onModifierListeClick(ActionEvent event) {
 
     }
 

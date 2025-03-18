@@ -76,4 +76,17 @@ public class ListeRepository {
         }
         return listes;
     }
+
+    public void supprimerListe(Liste liste) {
+        String sql = "DELETE FROM liste WHERE id_liste = ?";
+        try {
+            PreparedStatement ps = connexion.prepareStatement(sql);
+            ps.setInt(1, liste.getIdListe());
+            ps.executeUpdate();
+            ps.close();
+            System.out.println("Liste bien supprimé");
+        }catch (SQLException e){
+            System.out.println("Erreur lors de la supprimer liste "+e.getMessage());
+        }
+    }
 }

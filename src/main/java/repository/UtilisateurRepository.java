@@ -161,5 +161,17 @@ public class UtilisateurRepository {
             return true;
         }
     }
+
+    public void supprimerUtilisateur(Utilisateur utilisateur) {
+        String sql = "DELETE FROM utilisateur WHERE id_utilisateur = ?";
+        try{
+            PreparedStatement stmt = connexion.prepareStatement(sql);
+            stmt.setInt(1, utilisateur.getId());
+            stmt.executeUpdate();
+            System.out.println("Compte bien supprimé");
+        }catch (SQLException e){
+            System.out.println("Erreur lors de la suppression du compte : " + e.getMessage());
+        }
+    }
 }
 
