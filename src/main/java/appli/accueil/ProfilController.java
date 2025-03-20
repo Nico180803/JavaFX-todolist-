@@ -131,11 +131,6 @@ public class ProfilController implements Initializable {
     }
 
     @FXML
-    void OnPageAdminButtonClick(ActionEvent event) throws IOException {
-        StartApplication.changeScene("accueil/Admin");
-    }
-
-    @FXML
     void OnSupprimerListeClick(ActionEvent event) {
             listeRepository.supprimerListe(tableView.getSelectionModel().getSelectedItem());
             tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
@@ -149,7 +144,12 @@ public class ProfilController implements Initializable {
     }
 
     @FXML
-    void OnTableViewPressed(MouseEvent event) {
+    void OnTableViewPressed(MouseEvent event) throws IOException {
+        int nbrClick = event.getClickCount();
+        if (nbrClick == 2) {
+            StartApplication.changeScene("accueil/Liste");
+
+        }
     }
 
     @FXML

@@ -16,7 +16,7 @@ public class Type {
         this.codeCouleur = codeCouleur;
     }
 
-    public int getidType() {
+    public int getIdType() {
         return idType;
     }
 
