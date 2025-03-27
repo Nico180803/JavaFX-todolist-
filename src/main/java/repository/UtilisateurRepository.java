@@ -46,7 +46,7 @@ public class UtilisateurRepository {
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
-                utilisateur = new Utilisateur(rs.getInt("id_user"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getString("mdp"));
+                utilisateur = new Utilisateur(rs.getInt("id_utilisateur"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getString("mdp"));
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la recuperation de l'utilisateur : " + e.getMessage());

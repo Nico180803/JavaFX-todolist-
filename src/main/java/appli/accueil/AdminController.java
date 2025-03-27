@@ -2,14 +2,19 @@ package appli.accueil;
 
 import appli.StartApplication;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import model.Liste;
 import model.Type;
 import model.Utilisateur;
+import repository.ListeRepository;
 import repository.TypeRepository;
 import repository.UtilisateurRepository;
 import session.SessionUtilisateur;
@@ -22,6 +27,12 @@ public class AdminController implements Initializable {
 
     @FXML
     public Button ajouterTypeButton;
+
+    @FXML
+    private TextField codeCouleurTypeTextField;
+
+    @FXML
+    private TextField nomTypeTextField;
 
     @FXML
     private TableView <Type> typeTableView;
@@ -108,5 +119,13 @@ public class AdminController implements Initializable {
 
     @FXML
     public void OnAjouterTypeClick(ActionEvent actionEvent) {
+        Type type = new Type(nomTypeTextField.getText(), codeCouleurTypeTextField.getText());
+        TypeRepository typeRepository = new TypeRepository();
+        type = typeRepository.ajouterType(type);
+        if (type.getIdType() == 0){
+            System.out.println("oups...");
+        }else {
+            typeTableView.getItems().add(type);
+        }
     }
 }

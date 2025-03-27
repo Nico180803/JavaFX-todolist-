@@ -1,5 +1,7 @@
 package model;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class Utilisateur {
 
     private int id;
@@ -72,7 +74,8 @@ public class Utilisateur {
     }
 
     public void setMdp(String password) {
-        this.mdp = password;
+        BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
+        this.mdp = bcryptPasswordEncoder.encode(password);
     }
 
 }

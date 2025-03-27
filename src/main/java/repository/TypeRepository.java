@@ -17,18 +17,29 @@ public class TypeRepository {
         connexion = Database.getConnexion();
     }
 
-    public void ajouterType(Type type) {
-        String query = "INSERT INTO types(nom,code_couleur) VALUES (?,?)";
+    public Type ajouterType(Type type) {
+
+        String query = "INSERT INTO type(nom,code_couleur) VALUES (?,?)";
+
+        String sql2 = "SELECT LAST_INSERT_ID()";
         try {
             PreparedStatement ps = connexion.prepareStatement(query);
             ps.setString(1, type.getNom());
             ps.setString(2, type.getCodeCouleur());
             ps.executeUpdate();
+            ps.close();
+
+            ps = connexion.prepareStatement(sql2);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int id = rs.getInt(1);
+            type.setIdType(id);
 
             System.out.println("Ajout du type "+type.getNom()+" reussi");
         }catch (SQLException e) {
             System.out.println("Erreur lors de l'ajout du type : "+e.getMessage());
         }
+        return type;
     }
 
     public void supprimerType(Type type) {

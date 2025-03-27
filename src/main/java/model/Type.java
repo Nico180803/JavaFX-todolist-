@@ -16,6 +16,10 @@ public class Type {
         this.codeCouleur = codeCouleur;
     }
 
+    public void setIdType(int idType) {
+        this.idType = idType;
+    }
+
     public int getIdType() {
         return idType;
     }
