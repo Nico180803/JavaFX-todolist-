@@ -84,6 +84,22 @@ public class UtilisateurRepository {
         }
     }
 
+    public void mettreAJourUtilisateurParId(Utilisateur utilisateur) {
+        String sql = "UPDATE utilisateur SET nom = ?, prenom = ?, mdp = ?, email = ? WHERE id_utilisateur = ?";
+        try {
+            PreparedStatement stmt = connexion.prepareStatement(sql);
+            stmt.setString(1, utilisateur.getNom());
+            stmt.setString(2, utilisateur.getPrenom());
+            stmt.setString(3, utilisateur.getMdp());
+            stmt.setString(4, utilisateur.getEmail());
+            stmt.setInt(5, utilisateur.getId());
+            stmt.executeUpdate();
+
+        }catch (SQLException e){
+            System.out.println("Erreur lors de la modification du compte : " + e.getMessage());
+        }
+    }
+
     public void mettreAJourUtilisateur(Utilisateur utilisateur) {
         String sql = "UPDATE utilisateur SET nom = ?, prenom = ?, mdp = ? WHERE email = ?";
         try {

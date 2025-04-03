@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import model.Liste;
 import model.Type;
 import model.Utilisateur;
@@ -35,7 +36,7 @@ public class AdminController implements Initializable {
     private TextField nomTypeTextField;
 
     @FXML
-    private TableView <Type> typeTableView;
+    private TableView<Type> typeTableView;
 
     @FXML
     private TableView<Utilisateur> userTableView;
@@ -57,14 +58,14 @@ public class AdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String [][] colonnes = {
-                { "Id Utilisateur","id" },
-                { "Nom","nom" },
-                { "Prénom","prenom" },
-                { "Email","email" },
+        String[][] colonnes = {
+                {"Id Utilisateur", "id"},
+                {"Nom", "nom"},
+                {"Prénom", "prenom"},
+                {"Email", "email"},
         };
 
-        for ( int i = 0 ; i < colonnes.length ; i ++ ){
+        for (int i = 0; i < colonnes.length; i++) {
 
 //Création de la colonne avec le titre
             TableColumn<Utilisateur, String> maCol = new TableColumn<>(colonnes[i][0]);
@@ -79,13 +80,13 @@ public class AdminController implements Initializable {
 
 //TABLEAU DES TYPES : //
 
-        String [][] colonnesType = {
-                { "Id Type","idType" },
-                { "Nom","nom" },
-                { "Code Couleur","CodeCouleur" },
+        String[][] colonnesType = {
+                {"Id Type", "idType"},
+                {"Nom", "nom"},
+                {"Code Couleur", "CodeCouleur"},
         };
 
-        for ( int i = 0 ; i < colonnesType.length ; i ++ ){
+        for (int i = 0; i < colonnesType.length; i++) {
 
 //Création de la colonne avec le titre
             TableColumn<Type, String> maCol2 = new TableColumn<>(colonnesType[i][0]);
@@ -122,10 +123,24 @@ public class AdminController implements Initializable {
         Type type = new Type(nomTypeTextField.getText(), codeCouleurTypeTextField.getText());
         TypeRepository typeRepository = new TypeRepository();
         type = typeRepository.ajouterType(type);
-        if (type.getIdType() == 0){
+        if (type.getIdType() == 0) {
             System.out.println("oups...");
-        }else {
+        } else {
             typeTableView.getItems().add(type);
+        }
+    }
+
+    @FXML
+    void OnTableViewPressed(MouseEvent event) throws IOException {
+        Utilisateur selection = userTableView.getSelectionModel().getSelectedItem();
+
+        if (event.getClickCount() == 2) { // Vérifie si c'est un double-clic
+            if (selection != null) {
+                StartApplication.changeScene("accueil/ModificationUser");
+                ModificationUserController controller = (ModificationUserController)
+                        StartApplication. getControllerFromStage();
+                controller.initData(selection);
+            }
         }
     }
 }

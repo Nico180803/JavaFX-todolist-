@@ -111,7 +111,7 @@ public class ProfilController implements Initializable {
         SessionUtilisateur.getInstance().getUtilisateur().setPrenom(prenomTextField.getText());
         SessionUtilisateur.getInstance().getUtilisateur().setEmail(emailTextField.getText());
 
-        utilisateurRepository.mettreAJourUtilisateur(SessionUtilisateur.getInstance().getUtilisateur());
+        utilisateurRepository.mettreAJourUtilisateurParId(SessionUtilisateur.getInstance().getUtilisateur());
         reussiteText.setText("Profil bien mis à jour !");
         nomProfilText.setText("Profil de "+SessionUtilisateur.getInstance().getUtilisateur().getPrenom()+" "+SessionUtilisateur.getInstance().getUtilisateur().getNom());
     }
