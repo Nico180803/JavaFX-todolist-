@@ -16,7 +16,7 @@ public class TacheRepository {
     }
 
     public void ajouterTache(Tache tache) {
-        String sql = "INSERT INTO taches(nom,etat,ref_liste,ref_type) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO tache(nom,etat,ref_liste,ref_type) VALUES (?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, tache.getNom());
@@ -29,5 +29,26 @@ public class TacheRepository {
         }catch (SQLException e) {
             System.out.println("Erreur lors de l'ajout de la tache : " + e.getMessage());
         }
+    }
+
+    public void supprimerTache(Tache tache) {
+        String sql = "DELETE FROM tache WHERE id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+        }catch (SQLException e){
+            System.out.println("Erreur lors de la supprimer la tache: " + e.getMessage());
+        }
+    }
+
+    public void modifierTache(Tache tache) {
+     String sql = "UPDATE tache SET nom = ?, etat = ? WHERE id = ?";
+     try{
+         PreparedStatement ps = connection.prepareStatement(sql);
+         ps.setString(1,tache.getNom());
+         ps.setInt(2,tache.getEtat());
+     }catch (SQLException e){
+         System.out.println("Erreur lors de la modifier la tache: " + e.getMessage());
+     }
     }
 }
