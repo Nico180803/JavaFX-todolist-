@@ -24,8 +24,8 @@ public class TacheRepository {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, tache.getNom());
             ps.setInt(2,tache.getEtat());
-            ps.setInt(3,tache.getrefListe());
-            ps.setInt(4,tache.getrefType());
+            ps.setInt(3,tache.getRefListe());
+            ps.setInt(4,tache.getRefType());
             ps.executeUpdate();
 
             System.out.println("Ajout de la tache "+ tache.getNom()+" reussi");

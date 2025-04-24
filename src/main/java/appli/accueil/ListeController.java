@@ -61,7 +61,8 @@ public class ListeController implements Initializable {
     public void initData(Liste liste){
         nomProjetText.setText(liste.getNom());
         refListe = liste.getIdListe();
-//PROBLEME INIT DATA ENVOIE APS LA REF ET FAIRE LE SELECT SUR LE TABLEAU
+        tachesTableView.getItems().addAll(tacheRepository.recupererTaches(refListe));
+//FAIRE LE SELECT SUR LE TABLEAU
     }
 
     @Override
@@ -86,8 +87,6 @@ public class ListeController implements Initializable {
 //Ajout de la colonne dans notre tableau
             tachesTableView.getColumns().add(maCol);
         }
-        tachesTableView.getItems().addAll(tacheRepository.recupererTaches(refListe));
-        System.out.println(refListe);
     }
 
     @FXML
