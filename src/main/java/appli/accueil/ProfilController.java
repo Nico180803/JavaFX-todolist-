@@ -151,8 +151,6 @@ public class ProfilController implements Initializable {
             ListeController controller = (ListeController)
                     StartApplication. getControllerFromStage();
             controller.initData(tableView.getSelectionModel().getSelectedItem());
-
-
         }
     }
 
