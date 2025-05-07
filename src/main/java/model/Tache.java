@@ -22,7 +22,7 @@ public class Tache {
         this.refType = refType;
     }
 
-    public int getidTache() {
+    public int getIdTache() {
         return idTache;
     }
 
@@ -42,19 +42,19 @@ public class Tache {
         this.etat = etat;
     }
 
-    public int getrefListe() {
+    public int getRefListe() {
         return refListe;
     }
 
-    public void setrefListe(int refListe) {
+    public void setRefListe(int refListe) {
         this.refListe = refListe;
     }
 
-    public int getrefType() {
+    public int getRefType() {
         return refType;
     }
 
-    public void setrefType(int refType) {
+    public void setRefType(int refType) {
         this.refType = refType;
     }
 }

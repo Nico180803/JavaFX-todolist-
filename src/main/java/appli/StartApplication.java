@@ -29,6 +29,10 @@ public class StartApplication extends Application {
         mainStage.setScene(scene);
     }
 
+    public static Object getControllerFromStage(){
+        return mainStage.getScene().getUserData();
+    }
+
     public static void main(String[] args) {
         launch();
     }

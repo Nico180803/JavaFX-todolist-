@@ -148,7 +148,9 @@ public class ProfilController implements Initializable {
         int nbrClick = event.getClickCount();
         if (nbrClick == 2) {
             StartApplication.changeScene("accueil/Liste");
-
+            ListeController controller = (ListeController)
+                    StartApplication. getControllerFromStage();
+            controller.initData(tableView.getSelectionModel().getSelectedItem());
         }
     }
 
