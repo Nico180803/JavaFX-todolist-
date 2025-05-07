@@ -73,4 +73,20 @@ public class TypeRepository {
         }
         return types;
     }
+
+    public int getTypeParNom(String string) {
+        int idType = 0;
+        String query = "SELECT id_type FROM type WHERE nom = ?";
+        try{
+            PreparedStatement ps = connexion.prepareStatement(query);
+            ps.setString(1, string);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            idType = rs.getInt("id_type");
+        }catch (SQLException e){
+            System.out.println("Erreur lors de la récuparation du type par nom" + e.getMessage());
+        }
+
+        return idType;
+    }
 }

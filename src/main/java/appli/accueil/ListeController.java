@@ -2,10 +2,7 @@ package appli.accueil;
 
 import appli.StartApplication;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.fxml.FXML;
@@ -13,13 +10,22 @@ import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 import model.Liste;
 import model.Tache;
+import model.Type;
 import repository.TacheRepository;
+import repository.TypeRepository;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ListeController implements Initializable {
+
+    @FXML
+    public ComboBox<Type> ModifChoiceBox;
+
+    @FXML
+    public ComboBox<Type> AjouterChoiceBox;
 
     @FXML
     private Button ajouterButton;
@@ -51,12 +57,13 @@ public class ListeController implements Initializable {
     @FXML
     private Button supprimerButton;
 
-    private int refListe;
-
     @FXML
     private TableView<Tache> tachesTableView;
 
+    private int refListe;
+
     private TacheRepository tacheRepository = new TacheRepository();
+    private TypeRepository typeRepository = new TypeRepository();
 
     public void initData(Liste liste){
         nomProjetText.setText(liste.getNom());
@@ -67,6 +74,16 @@ public class ListeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+        List<Type> types = typeRepository.getAllType();
+        this.AjouterChoiceBox.getItems().addAll(types);
+        this.ModifChoiceBox.getItems().addAll(types);
+
+        this.nomModifTextField.setDisable(true);
+        this.etatModifTextField.setDisable(true);
+        this.ModifChoiceBox.setDisable(true);
+        this.modifierButton.setDisable(true);
 
         String [][] colonnes = {
                 { "Id Tache","idTache" },
@@ -92,23 +109,39 @@ public class ListeController implements Initializable {
     @FXML
     void onAjouterClick(ActionEvent event) {
         TacheRepository tacheRepository = new TacheRepository();
-        //Tache tache = new Tache(nomTextField.getText(), etatTextField.getText(), refListe,);
-        //tacheRepository.ajouterTache(tache);
-        // MAJ TABLEAU
+
+        Tache tache = new Tache(nomTextField.getText(), Integer.parseInt(etatTextField.getText()), refListe ,typeRepository.getTypeParNom(AjouterChoiceBox.getSelectionModel().getSelectedItem().toString()));
+        tache = tacheRepository.ajouterTache(tache);
+        if (tache.getIdTache() != 0 ){
+            tachesTableView.getItems().add(tache);
+        }else{
+            System.out.println("erreur lors de l'ajour");
+        }
     }
 
     @FXML
     void onConfirmerClick(ActionEvent event) {
-        //Tache tache = new Tache(nomTextField.getText(), etatTextField.getText(), refListe, REFTACHE A METTRE MODIF LE SELECT);
+
         TacheRepository tacheRepository = new TacheRepository();
-        //tacheRepository.modifierTache(tache);
-        // MAJ TABLEAU
-        //Cacher parti modif
+        Tache tache = tachesTableView.getSelectionModel().getSelectedItem();
+        tache.setNom(nomModifTextField.getText());
+        tache.setEtat(Integer.parseInt(etatModifTextField.getText()));
+        tache.setRefType(ModifChoiceBox.getSelectionModel().getSelectedItem().getIdType());
+        tacheRepository.modifierTache(tache);
+        tachesTableView.refresh();
+
+        this.nomModifTextField.setDisable(true);
+        this.etatModifTextField.setDisable(true);
+        this.ModifChoiceBox.setDisable(true);
+        this.modifierButton.setDisable(true);
     }
 
     @FXML
     void onModifierClick(ActionEvent event) {
-        // montrer parti modif
+        this.nomModifTextField.setDisable(false);
+        this.etatModifTextField.setDisable(false);
+        this.ModifChoiceBox.setDisable(false);
+        this.modifierButton.setDisable(false);
     }
 
     @FXML
@@ -128,4 +161,3 @@ public class ListeController implements Initializable {
     }
 
 }
-

@@ -37,7 +37,4 @@ public class StartApplication extends Application {
         launch();
     }
 
-    public static Object getControllerFromStage() {
-        return mainStage.getScene().getUserData();
-    }
 }

@@ -57,4 +57,8 @@ public class Tache {
     public void setRefType(int refType) {
         this.refType = refType;
     }
+
+    public void setIdTache(int idTache) {
+        this.idTache = idTache;
+    }
 }

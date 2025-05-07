@@ -145,12 +145,12 @@ public class ProfilController implements Initializable {
 
     @FXML
     void OnTableViewPressed(MouseEvent event) throws IOException {
-        int nbrClick = event.getClickCount();
-        if (nbrClick == 2) {
+        Liste selection = tableView.getSelectionModel().getSelectedItem();
+        if (event.getClickCount() == 2) {
             StartApplication.changeScene("accueil/Liste");
             ListeController controller = (ListeController)
                     StartApplication. getControllerFromStage();
-            controller.initData(tableView.getSelectionModel().getSelectedItem());
+            controller.initData(selection);
         }
     }
 
