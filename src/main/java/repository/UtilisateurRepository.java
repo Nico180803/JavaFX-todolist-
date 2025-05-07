@@ -2,6 +2,7 @@ package repository;
 
 import database.Database;
 import jdk.jshell.execution.Util;
+import model.Liste;
 import model.Utilisateur;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -81,6 +82,20 @@ public class UtilisateurRepository {
             System.out.println("Compte bien supprimé");
         }catch (SQLException e){
             System.out.println("Erreur lors de la suppression du compte : " + e.getMessage());
+        }
+    }
+
+    public void ajouterListe(Utilisateur utilisateur, Liste liste) {
+        String sql = "INSERT INTO utilisateur_liste(ref_utilisateur, ref_liste) VALUES (?, ?)";
+        try{
+            PreparedStatement stmt = connexion.prepareStatement(sql);
+            stmt.setInt(1, utilisateur.getId());
+            stmt.setInt(2, liste.getIdListe());
+            stmt.executeUpdate();
+            System.out.println("Ajout efféctué");
+
+        }catch (SQLException e){
+            System.out.println("Erreur lors de l'ajout de l'utilisateur"+e.getMessage());
         }
     }
 

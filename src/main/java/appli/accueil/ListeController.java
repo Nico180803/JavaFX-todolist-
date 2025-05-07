@@ -68,11 +68,13 @@ public class ListeController implements Initializable {
     private TacheRepository tacheRepository = new TacheRepository();
     private TypeRepository typeRepository = new TypeRepository();
 
+    Liste liste;
+
     public void initData(Liste liste){
+        this.liste = liste;
         nomProjetText.setText(liste.getNom());
         refListe = liste.getIdListe();
         tachesTableView.getItems().addAll(tacheRepository.recupererTaches(refListe));
-//FAIRE LE SELECT SUR LE TABLEAU
     }
 
     @Override
@@ -126,6 +128,9 @@ public class ListeController implements Initializable {
     @FXML
     void onAjouterUserClick(ActionEvent event) throws IOException {
         StartApplication.changeScene("accueil/AjoutUser");
+        AjoutUserController controller = (AjoutUserController)
+                StartApplication.getControllerFromStage();
+        controller.initData(liste);
     }
 
     @FXML

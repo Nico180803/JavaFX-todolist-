@@ -32,13 +32,7 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return "Utilisateur{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + mdp + '\'' +
-                '}';
+        return email;
     }
 
     public int getId() {
