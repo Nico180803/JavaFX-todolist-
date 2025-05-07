@@ -28,6 +28,9 @@ public class ListeController implements Initializable {
     public ComboBox<Type> AjouterChoiceBox;
 
     @FXML
+    public Button ajouterUtilisateur;
+
+    @FXML
     private Button ajouterButton;
 
     @FXML
@@ -118,6 +121,11 @@ public class ListeController implements Initializable {
         }else{
             System.out.println("erreur lors de l'ajour");
         }
+    }
+
+    @FXML
+    void onAjouterUserClick(ActionEvent event) throws IOException {
+        StartApplication.changeScene("accueil/AjoutUser");
     }
 
     @FXML

@@ -31,5 +31,6 @@
             <Button fx:id="confirmerModifButton" mnemonicParsing="false" onAction="#onConfirmerClick" text="Confirmer" />
          </children>
       </VBox>
+      <Button fx:id="ajouterUtilisateur" layoutX="449.0" layoutY="30.0" mnemonicParsing="false" onAction="#onAjouterUserClick" text="Ajouter un Utilisateur" />
    </children>
 </AnchorPane>
