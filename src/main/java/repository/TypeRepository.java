@@ -89,4 +89,19 @@ public class TypeRepository {
 
         return idType;
     }
+
+    public void modifierType(Type type) {
+        String query = "UPDATE type SET nom = ?, code_couleur = ? WHERE id_type = ?";
+        try {
+            PreparedStatement ps;
+            ps = connexion.prepareStatement(query);
+            ps.setString(1, type.getNom());
+            ps.setString(2, type.getCodeCouleur());
+            ps.setInt(3, type.getIdType());
+            ps.executeUpdate();
+            ps.close();
+        }catch (SQLException e){
+            System.out.println("Erreur lors de la modification du type : "+e.getMessage());
+        }
+    }
 }

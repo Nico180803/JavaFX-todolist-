@@ -80,17 +80,18 @@ public class ListeController implements Initializable {
         this.AjouterChoiceBox.getItems().addAll(types);
         this.ModifChoiceBox.getItems().addAll(types);
 
+        this.AjouterChoiceBox.getSelectionModel().select(0);
+        this.ModifChoiceBox.getSelectionModel().select(0);
+
         this.nomModifTextField.setDisable(true);
         this.etatModifTextField.setDisable(true);
         this.ModifChoiceBox.setDisable(true);
         this.modifierButton.setDisable(true);
 
         String [][] colonnes = {
-                { "Id Tache","idTache" },
                 { "Nom","nom" },
                 { "Etat","etat" },
-                { "Ref Liste","refListe" },
-                { "Ref Type","refType" },
+                { "Type","refType" },
         };
 
         for ( int i = 0 ; i < colonnes.length ; i ++ ){

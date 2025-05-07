@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.AdminController">
+<AnchorPane prefHeight="400.0" prefWidth="927.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.AdminController">
    <children>
       <HBox layoutY="1.0" prefHeight="328.0" prefWidth="600.0" AnchorPane.bottomAnchor="70.66666666666669" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
          <children>
@@ -29,7 +29,6 @@
                   </TableView>
                   <ButtonBar prefHeight="40.0" prefWidth="231.0">
                     <buttons>
-                      <Button minWidth="50.0" mnemonicParsing="false" prefHeight="25.0" text="Modifier" />
                         <Button fx:id="supprimerUserButton" minWidth="27.0" mnemonicParsing="false" onAction="#OnSupprimerUserClick" prefHeight="25.0" text="Supprimer" />
                     </buttons>
                      <VBox.margin>
@@ -54,6 +53,10 @@
                      <VBox.margin>
                         <Insets right="10.0" top="12.0" />
                      </VBox.margin>
+                     <buttons>
+                        <Button fx:id="modifierTypeButton" minWidth="27.0" mnemonicParsing="false" onAction="#OnModifierTypeClick" prefHeight="25.0" text="Modifier" />
+                        <Button fx:id="supprimerTypeButton" minWidth="27.0" mnemonicParsing="false" onAction="#OnSupprimerTypeClick" prefHeight="25.0" text="Supprimer" />
+                     </buttons>
                   </ButtonBar>
                </children>
             </VBox>
@@ -70,6 +73,21 @@
                      </VBox.margin>
                   </TextField>
                   <Button fx:id="ajouterTypeButton" mnemonicParsing="false" onAction="#OnAjouterTypeClick" text="Ajouter un type">
+                     <VBox.margin>
+                        <Insets bottom="50.0" left="5.0" />
+                     </VBox.margin>
+                  </Button>
+                  <TextField fx:id="nomModifTypeTextField" promptText="Nom">
+                     <VBox.margin>
+                        <Insets bottom="12.0" left="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="codeCouleurModifTypeTextField" promptText="Code Couleur">
+                     <VBox.margin>
+                        <Insets bottom="12.0" left="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Button fx:id="confirmerModifierTypeButton" mnemonicParsing="false" onAction="#OnConfirmerModifierTypeClick" text="Modifier Type">
                      <VBox.margin>
                         <Insets left="5.0" />
                      </VBox.margin>

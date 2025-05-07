@@ -30,6 +30,16 @@ public class AdminController implements Initializable {
     public Button ajouterTypeButton;
 
     @FXML
+    public Button modifierTypeButton;
+
+    @FXML
+    public TextField codeCouleurModifTypeTextField;
+
+    @FXML
+    public TextField nomModifTypeTextField;
+    public Button confirmerModifierTypeButton;
+
+    @FXML
     private TextField codeCouleurTypeTextField;
 
     @FXML
@@ -58,6 +68,11 @@ public class AdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        this.confirmerModifierTypeButton.setDisable(true);
+        this.nomModifTypeTextField.setDisable(true);
+        this.codeCouleurModifTypeTextField.setDisable(true);
+
         String[][] colonnes = {
                 {"Id Utilisateur", "id"},
                 {"Nom", "nom"},
@@ -104,6 +119,28 @@ public class AdminController implements Initializable {
     void OnSupprimerTypeClick(ActionEvent event) {
         typeRepository.supprimerType(typeTableView.getSelectionModel().getSelectedItem());
         typeTableView.getItems().remove(typeTableView.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    void OnModifierTypeClick(ActionEvent event) {
+       this.confirmerModifierTypeButton.setDisable(false);
+       this.nomModifTypeTextField.setDisable(false);
+       this.codeCouleurModifTypeTextField.setDisable(false);
+    }
+
+
+    @FXML
+    void OnConfirmerModifierTypeClick(ActionEvent event) {
+        Type type = typeTableView.getSelectionModel().getSelectedItem();
+        type.setNom(nomModifTypeTextField.getText());
+        type.setCodeCouleur(codeCouleurModifTypeTextField.getText());
+        typeRepository.modifierType(type);
+
+        this.confirmerModifierTypeButton.setDisable(true);
+        this.nomModifTypeTextField.setDisable(true);
+        this.codeCouleurModifTypeTextField.setDisable(true);
+
+        this.typeTableView.refresh();
     }
 
     @FXML
