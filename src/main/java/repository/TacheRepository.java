@@ -61,9 +61,10 @@ public class TacheRepository {
     }
 
     public void supprimerTache(Tache tache) {
-        String sql = "DELETE FROM tache WHERE id = ?";
+        String sql = "DELETE FROM tache WHERE id_tache = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, tache.getIdTache());
             ps.executeUpdate();
         }catch (SQLException e){
             System.out.println("Erreur lors de la supprimer la tache: " + e.getMessage());
